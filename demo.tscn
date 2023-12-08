@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://dj8s1l8t10k4"]
+
+[ext_resource type="Texture2D" uid="uid://dh30g2cbrebnh" path="res://assets/prototype_black.png" id="1_g8bfv"]
+[ext_resource type="Texture2D" uid="uid://0c1s1srjlnqy" path="res://assets/kloofendal_48d_partly_cloudy_puresky_2k.exr" id="2_5h6kv"]
+[ext_resource type="PackedScene" uid="uid://cpugdfgrceeln" path="res://player/Player.tscn" id="3_ufvkx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bh7iw"]
+albedo_texture = ExtResource("1_g8bfv")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_i1geh"]
+panorama = ExtResource("2_5h6kv")
+
+[sub_resource type="Sky" id="Sky_da11p"]
+sky_material = SubResource("PanoramaSkyMaterial_i1geh")
+
+[sub_resource type="Environment" id="Environment_wtvvs"]
+background_mode = 2
+sky = SubResource("Sky_da11p")
+
+[node name="Demo" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_bh7iw")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(23, 0.1, 23)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 1.08797, 1.24118, -9.8014)
+size = Vector3(8.85981, 1, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 1.08797, 0.540351, -6.8014)
+size = Vector3(8.85981, 1, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.77256, 0, -3.64989)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.77256, 0.496091, -2.11607)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.77256, 0.940309, -0.216244)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17579, 1.20463, -0.216244)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17579, 1.60662, -1.72683)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17579, 2.11888, -3.28978)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17579, 2.76193, -4.69925)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18984, 3.41941, -4.65956)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0873, 2.17313, 5.46844)
+size = Vector3(7.05111, 0.156175, 5.13527)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0873, 1.74151, -5.428)
+size = Vector3(7.05111, 0.156175, 5.13527)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wtvvs")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.965926, 0.183013, -0.183013, 0, 0.707107, 0.707107, 0.258819, -0.683013, 0.683013, 0, 1000, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_ufvkx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
