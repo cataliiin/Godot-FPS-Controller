@@ -3,7 +3,6 @@
 ### Features
 
 - all basic movement features like *running, jumping and crouching*
-- smooth mouse
 - head bobbing
 - solves slope sliding issues
 
