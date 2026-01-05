@@ -16,7 +16,7 @@
 **SPACE** - jump \
 **L_SHIFT** - run \
 **C** - crouch \
-**`** - toggle mouse mode ( *the button under esc* )
+**`** - toggle mouse mode
 
 #### Other
 Simply copy the "player" folder and paste it into your project files.
