@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpugdfgrceeln"]
+[gd_scene load_steps=4 format=3 uid="uid://7pw4ukol3ffb"]
 
-[ext_resource type="Script" path="res://player/player_movement.gd" id="1_bttu6"]
-[ext_resource type="Script" path="res://player/player_camera.gd" id="2_ltith"]
+[ext_resource type="Script" uid="uid://dknsnv55n138o" path="res://player/player_movement.gd" id="1_bttu6"]
+[ext_resource type="Script" uid="uid://bcsuvdtppxbsx" path="res://player/player_camera.gd" id="2_ltith"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ku5fn"]
 radius = 0.4
@@ -9,16 +9,33 @@ height = 1.8
 
 [node name="Player" type="CharacterBody3D"]
 wall_min_slide_angle = 0.174533
+safe_margin = 0.008
 script = ExtResource("1_bttu6")
-running_fov = 82.0
+walk_movement_speed = 2.3
+run_movement_speed = 4.0
+fov_lerp_speed = 2.0
+default_fov = 80.0
+running_fov = 85.0
+jump_force = 5.0
+hb_running_speed = 17.8
+hb_walking_speed = 14.5
+hb_crouching_speed = 10.6
+hb_running_intensity = 0.13
+hb_walking_intensity = 0.1
+hb_crouching_intensity = 0.09
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_ku5fn")
+debug_color = Color(0.99876255, 0, 0.0909146, 1)
+debug_fill = false
 
 [node name="HeadRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 target_position = Vector3(0, 0.05, 0)
+
+[node name="DropPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0023932457, 1.0199994, -0.15472794)
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
@@ -27,12 +44,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
 [node name="InteractRayCast" type="RayCast3D" parent="Head/Eyes"]
 target_position = Vector3(0, 0, -4)
-collision_mask = 2
+collision_mask = 3
+collide_with_areas = true
+debug_shape_thickness = 1
 
 [node name="Camera3D" type="Camera3D" parent="Head/Eyes"]
+physics_interpolation_mode = 1
 script = ExtResource("2_ltith")
 head_nodepath = NodePath("../..")
 player_nodepath = NodePath("../../..")
+player_eyes_nodepath = NodePath("..")
+nudge_target_nodepath = NodePath("..")
 
 [node name="Hand" type="Node3D" parent="Head/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19, -0.12, -0.28)
